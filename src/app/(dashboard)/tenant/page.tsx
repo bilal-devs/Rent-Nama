@@ -125,25 +125,25 @@ export default async function TenantDashboard() {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant card-elevation-1">
-          <div className="w-10 h-10 rounded-xl bg-status-paid/10 flex items-center justify-center mb-3">
-            <CheckCircle2 className="w-5 h-5 text-status-paid" />
+        <div className="p-3 md:p-5 rounded-xl bg-surface-container-lowest border border-surface-variant card-elevation-1">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-status-paid/10 flex items-center justify-center mb-2 md:mb-3">
+            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-status-paid" />
           </div>
-          <p className="text-xs font-semibold text-on-surface-variant tracking-wider uppercase">
+          <p className="text-[10px] md:text-xs font-semibold text-on-surface-variant tracking-wider uppercase">
             Paid
           </p>
-          <p className="text-xl font-bold text-on-surface mt-1">
+          <p className="text-lg md:text-2xl font-bold text-on-surface mt-0.5 md:mt-1 tracking-tight">
             {formatCurrency(paidThisYear)}
           </p>
         </div>
-        <div className="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant card-elevation-1">
-          <div className="w-10 h-10 rounded-xl bg-status-pending/10 flex items-center justify-center mb-3">
-            <Clock className="w-5 h-5 text-status-pending" />
+        <div className="p-3 md:p-5 rounded-xl bg-surface-container-lowest border border-surface-variant card-elevation-1">
+          <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-status-pending/10 flex items-center justify-center mb-2 md:mb-3">
+            <Clock className="w-4 h-4 md:w-5 md:h-5 text-status-pending" />
           </div>
-          <p className="text-xs font-semibold text-on-surface-variant tracking-wider uppercase">
+          <p className="text-[10px] md:text-xs font-semibold text-on-surface-variant tracking-wider uppercase">
             Pending
           </p>
-          <p className="text-xl font-bold text-on-surface mt-1">
+          <p className="text-lg md:text-2xl font-bold text-on-surface mt-0.5 md:mt-1 tracking-tight">
             {formatCurrency(pendingAmount)}
           </p>
         </div>
@@ -151,22 +151,22 @@ export default async function TenantDashboard() {
 
       {/* Next Due Card */}
       {nextDue && (
-        <div className="p-5 rounded-xl bg-surface-container-lowest border border-surface-variant card-elevation-1">
-          <div className="flex items-center justify-between">
+        <div className="p-4 md:p-5 rounded-xl bg-surface-container-lowest border border-surface-variant card-elevation-1">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-status-pending/10 flex items-center justify-center">
-                <Calendar className="w-5 h-5 text-status-pending" />
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-status-pending/10 flex items-center justify-center shrink-0">
+                <Calendar className="w-4 h-4 md:w-5 md:h-5 text-status-pending" />
               </div>
               <div>
-                <p className="text-xs font-semibold text-on-surface-variant tracking-wider uppercase">
+                <p className="text-[10px] md:text-xs font-semibold text-on-surface-variant tracking-wider uppercase">
                   Next Payment Due
                 </p>
-                <p className="text-lg font-bold text-on-surface">
+                <p className="text-sm md:text-lg font-bold text-on-surface mt-0.5 md:mt-1">
                   {formatDate(nextDue.due_date)} — {formatCurrency(Number(nextDue.amount))}
                 </p>
               </div>
             </div>
-            <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${getStatusColor(nextDue.status)}`}>
+            <span className={`self-start sm:self-auto text-xs font-semibold px-2.5 py-1 rounded-full border ${getStatusColor(nextDue.status)}`}>
               {formatStatus(nextDue.status)}
             </span>
           </div>
@@ -184,12 +184,12 @@ export default async function TenantDashboard() {
           <Link
             key={action.label}
             href={action.href}
-            className="flex items-center gap-3 p-4 rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-outline-variant hover:bg-surface-container-low transition-all group"
+            className="flex flex-col md:flex-row items-center gap-2 md:gap-3 p-3 md:p-4 rounded-xl bg-surface-container-lowest border border-surface-variant hover:border-outline-variant hover:bg-surface-container-low transition-all group text-center md:text-left"
           >
-            <div className="w-10 h-10 rounded-xl bg-surface-container-high group-hover:bg-primary/10 flex items-center justify-center transition-colors">
-              <action.icon className="w-5 h-5 text-on-surface-variant group-hover:text-primary transition-colors" />
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-surface-container-high group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <action.icon className="w-4 h-4 md:w-5 md:h-5 text-on-surface-variant group-hover:text-primary transition-colors" />
             </div>
-            <span className="text-sm font-semibold text-on-surface">
+            <span className="text-xs md:text-sm font-semibold text-on-surface">
               {action.label}
             </span>
           </Link>

@@ -63,13 +63,20 @@ export function Sidebar({ role, userName }: { role: UserRole; userName: string }
 
   return (
     <>
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 rounded-lg bg-surface-container-lowest card-elevation-1 flex items-center justify-center"
-      >
-        <Menu className="w-5 h-5 text-on-surface" />
-      </button>
+      {/* Mobile Header Bar */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-surface-container-lowest border-b border-surface-variant flex items-center px-4 z-30 justify-between">
+        <button
+          onClick={() => setOpen(true)}
+          className="w-10 h-10 rounded-lg hover:bg-surface-container-low flex items-center justify-center"
+          aria-label="Open menu"
+        >
+          <Menu className="w-5 h-5 text-on-surface" />
+        </button>
+        <span className="text-sm font-bold text-primary tracking-tight">
+          Rent Nama
+        </span>
+        <div className="w-10" />
+      </div>
 
       {/* Overlay */}
       {open && (
@@ -126,8 +133,7 @@ export function Sidebar({ role, userName }: { role: UserRole; userName: string }
                   "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group",
                   isActive(item.href)
                     ? "bg-primary/10 text-primary"
-                    : "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface",
-                  item.desktopOnly && "hidden lg:flex"
+                    : "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
                 )}
               >
                 <item.icon className={cn("w-5 h-5", isActive(item.href) ? "text-primary" : "text-outline")} />

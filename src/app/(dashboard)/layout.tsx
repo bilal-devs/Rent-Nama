@@ -34,7 +34,7 @@ export default async function DashboardLayout({
       <Sidebar role={role} userName={userName} />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pb-20 lg:pb-0">
+      <main className="flex-1 overflow-y-auto pt-14 lg:pt-0 pb-20 lg:pb-0">
         <div className="max-w-6xl mx-auto px-5 py-6 lg:py-8">
           {children}
         </div>
