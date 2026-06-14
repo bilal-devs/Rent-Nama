@@ -1,6 +1,14 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port: parseInt(process.env.SMTP_PORT || "465"),
+  secure: process.env.SMTP_PORT === "465", // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
 
 interface EmailPayload {
   to: string;
@@ -10,22 +18,17 @@ interface EmailPayload {
 
 export async function sendEmail({ to, subject, html }: EmailPayload) {
   try {
-    const { data, error } = await resend.emails.send({
-      from: "Rent Nama <noreply@resend.dev>",
+    const info = await transporter.sendMail({
+      from: `"Rent Nama" <${process.env.SMTP_USER}>`,
       to,
       subject,
       html,
     });
 
-    if (error) {
-      console.error("Email send error:", error);
-      return { error: error.message };
-    }
-
-    return { success: true, id: data?.id };
-  } catch (err) {
+    return { success: true, id: info.messageId };
+  } catch (err: any) {
     console.error("Email error:", err);
-    return { error: "Failed to send email" };
+    return { error: err.message || "Failed to send email" };
   }
 }
 
