@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import type { UserRole } from "@/types/database";
 
@@ -64,8 +64,9 @@ export async function signUp(formData: FormData) {
   }
 
   if (authData.user) {
-    // Create user record in public.users
-    const { error: userError } = await supabase.from("users").insert({
+    // Create user record in public.users using Service Client to bypass RLS during signup
+    const serviceClient = await createServiceClient();
+    const { error: userError } = await serviceClient.from("users").insert({
       id: authData.user.id,
       full_name: fullName,
       email,
